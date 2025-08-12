@@ -12,6 +12,12 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+# • 워크플로우 권한 설정
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   # • 빌드 및 배포 작업
   build-and-deploy:
@@ -21,12 +27,21 @@ jobs:
       # • 코드 체크아웃
       - name: Checkout
         uses: actions/checkout@v4
-        
+        with:
+          # • Git 히스토리 전체 체크아웃
+          fetch-depth: 0
+          
       # • Node.js 설정 (18.x 버전 사용)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          
+      # • Git 설정
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
       # • 현재 디렉토리 구조 확인
       - name: Debug directory structure
@@ -71,3 +86,6 @@ jobs:
           publish_dir: ./app/dist
           # • 커밋 메시지
           commit_message: ${{ github.event.head_commit.message }}
+          # • Git 설정
+          git_config_name: github-actions[bot]
+          git_config_email: github-actions[bot]@users.noreply.github.com
