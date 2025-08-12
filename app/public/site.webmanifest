@@ -1,0 +1,31 @@
+{
+  "name": "예산 계산기",
+  "short_name": "예산계산기",
+  "description": "React와 TypeScript로 구현된 간단하고 직관적인 예산(지출/수입) 관리 애플리케이션",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["finance", "productivity", "utilities"],
+  "lang": "ko",
+  "dir": "ltr"
+}

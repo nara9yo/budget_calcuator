@@ -1,0 +1,494 @@
+/**
+ * index.css - 예산 계산기 메인 스타일시트
+ * 
+ * 주요 기능:
+ * • CSS 변수를 통한 일관된 디자인 시스템
+ * • 반응형 웹 디자인 (모바일 최적화)
+ * • 모던한 UI 컴포넌트 스타일링
+ * • 애니메이션 및 호버 효과
+ * • 접근성을 고려한 디자인
+ */
+
+/* ===== CSS 변수 정의 ===== */
+:root {
+  /* • 배경 그라데이션 (보라색 계열) */
+  --bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* • 카드 배경색 (반투명 흰색) */
+  --card-bg: rgba(255, 255, 255, 0.98);
+  /* • 주요 텍스트 색상 */
+  --text: #1a202c;
+  /* • 보조 텍스트 색상 */
+  --muted: #4a5568;
+  /* • 주요 액션 색상 (초록색) */
+  --primary: #48bb78;
+  /* • 주요 액션 호버 색상 */
+  --primary-hover: #38a169;
+  /* • 위험 액션 색상 (빨간색) */
+  --danger: #f56565;
+  /* • 위험 액션 호버 색상 */
+  --danger-hover: #e53e3e;
+  /* • 테두리 색상 */
+  --border: #e2e8f0;
+  /* • 기본 그림자 효과 */
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  /* • 호버 시 그림자 효과 */
+  --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+  /* • 기본 둥근 모서리 */
+  --radius: 16px;
+  /* • 작은 둥근 모서리 */
+  --radius-sm: 8px;
+}
+
+/* ===== 전역 리셋 및 기본 설정 ===== */
+* { 
+  /* • 모든 요소에 border-box 적용 */
+  box-sizing: border-box; 
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root { 
+  /* • 전체 높이 설정 */
+  height: 100%; 
+  /* • 시스템 폰트 스택 적용 */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  /* • 배경 그라데이션 적용 */
+  background: var(--bg);
+  /* • 배경 고정 (스크롤 시에도 유지) */
+  background-attachment: fixed;
+  color: var(--text);
+  line-height: 1.6;
+  /* • 폰트 렌더링 최적화 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== 페이지 레이아웃 ===== */
+.page { 
+  padding: 24px; 
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 40px;
+  /* • 총지출 영역을 위한 하단 여백 */
+  padding-bottom: 120px;
+}
+
+.container { 
+  /* • 최대 너비 제한 및 중앙 정렬 */
+  max-width: 1000px; 
+  width: 100%;
+  margin: 0 auto; 
+}
+
+/* ===== 제목 스타일 ===== */
+.title { 
+  margin: 0 0 10px; 
+  font-size: 2.0rem;
+  font-weight: 800;
+  text-align: center;
+  color: white;
+  /* • 텍스트 그림자 효과 */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.025em;
+}
+
+/* ===== 카드 컴포넌트 ===== */
+.card {
+  background: var(--card-bg);
+  /* • 배경 블러 효과 */
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* • 부드러운 전환 효과 */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 24px;
+}
+
+.card:hover {
+  /* • 호버 시 그림자 및 위치 변화 */
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* ===== 지출 폼 스타일 ===== */
+.expense-form { 
+  /* • 그리드 레이아웃으로 3열 구성 */
+  display: grid; 
+  grid-template-columns: 1fr 1fr auto; 
+  gap: 20px; 
+  align-items: end;
+  margin-bottom: 32px;
+}
+
+.expense-form .row { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 8px; 
+}
+
+.expense-form label { 
+  font-size: 15px; 
+  font-weight: 600;
+  color: var(--text);
+  /* • 대문자 변환 및 자간 조정 */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.expense-form input { 
+  height: 48px; 
+  padding: 12px 16px; 
+  border: 2px solid var(--border); 
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 500;
+  /* • 부드러운 전환 효과 */
+  transition: all 0.2s ease;
+  background: white;
+  color: var(--text);
+}
+
+.expense-form input:focus {
+  outline: none;
+  border-color: var(--primary);
+  /* • 포커스 시 테두리 강조 효과 */
+  box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+  background: white;
+}
+
+.expense-form input::placeholder {
+  color: var(--muted);
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+/* ===== 버튼 스타일 ===== */
+.actions { 
+  display: flex; 
+  gap: 12px; 
+}
+
+.btn { 
+  height: 48px; 
+  padding: 0 24px; 
+  border: 0; 
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  /* • 부드러운 전환 효과 */
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  /* • 버튼 호버 시 빛나는 효과 */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn.primary { 
+  /* • 주요 액션 버튼 (초록색 그라데이션) */
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+}
+
+.btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
+}
+
+.btn.danger { 
+  /* • 위험 액션 버튼 (빨간색 그라데이션) */
+  background: linear-gradient(135deg, var(--danger) 0%, var(--danger-hover) 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(245, 101, 101, 0.3);
+}
+
+.btn.danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 101, 101, 0.4);
+}
+
+.btn:disabled { 
+  opacity: 0.5; 
+  cursor: not-allowed;
+  /* • 비활성화 시 호버 효과 제거 */
+  transform: none !important;
+}
+
+/* ===== 지출 목록 스타일 ===== */
+.expense-list ul { 
+  list-style: none; 
+  padding: 0; 
+  margin: 0; 
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--border);
+}
+
+.expense-item { 
+  /* • 그리드 레이아웃으로 3열 구성 */
+  display: grid; 
+  grid-template-columns: 2fr 1fr auto; 
+  align-items: center; 
+  gap: 16px; 
+  padding: 16px 20px; 
+  border-bottom: 1px solid var(--border);
+  /* • 부드러운 전환 효과 */
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.expense-item:hover {
+  background: white;
+  /* • 호버 시 오른쪽으로 이동 효과 */
+  transform: translateX(4px);
+}
+
+.expense-item:last-child { 
+  border-bottom: 0; 
+}
+
+.expense-item .title { 
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text);
+  text-align: left;
+}
+
+.expense-item .amount { 
+  color: var(--text);
+  text-align: right;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* ===== 액션 버튼 스타일 ===== */
+.item-actions { 
+  display: flex; 
+  gap: 8px; 
+  justify-content: flex-end; 
+}
+
+.icon-btn { 
+  background: transparent; 
+  border: 0; 
+  cursor: pointer; 
+  font-size: 18px; 
+  padding: 8px;
+  border-radius: 50%;
+  /* • 부드러운 전환 효과 */
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+
+.icon-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  /* • 호버 시 크기 확대 */
+  transform: scale(1.1);
+}
+
+.list-actions { 
+  display: flex; 
+  margin-top: 20px;
+}
+
+.total { 
+  font-size: 28px; 
+  font-weight: 700; 
+  margin: 24px 0; 
+  text-align: right; 
+}
+
+/* ===== 총지출 영역 스타일 ===== */
+/* • 총지출을 고정 위치에 한 줄로 표시 */
+.total-spending { 
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.98);
+  /* • 배경 블러 효과 */
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  /* • 상단 그림자 효과 */
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.total-spending .label { 
+  font-size: 20px; 
+  font-weight: 600; 
+  color: var(--text);
+  /* • 대문자 변환 및 자간 조정 */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.total-spending .amount { 
+  font-size: 2.5rem; 
+  font-weight: 800;
+  color: var(--text);
+}
+
+/* • 양수 금액 (지출) - 초록색 */
+.total-spending .amount.positive { 
+  color: var(--primary);
+}
+
+/* • 음수 금액 (수입) - 빨간색 */
+.total-spending .amount.negative { 
+  color: var(--danger);
+}
+
+/* • 개별 항목의 양수 금액 스타일 */
+.expense-item .amount.positive { 
+  color: var(--primary); 
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* • 개별 항목의 음수 금액 스타일 */
+.expense-item .amount.negative { 
+  color: var(--danger); 
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* ===== 토스트 알림 스타일 ===== */
+.toast { 
+  position: fixed; 
+  left: 50%; 
+  top: 24px; 
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.95);
+  /* • 배경 블러 효과 */
+  backdrop-filter: blur(20px);
+  color: white; 
+  padding: 16px 24px; 
+  border-radius: var(--radius-sm);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  z-index: 1000; 
+  min-width: 300px; 
+  text-align: center; 
+  font-size: 16px; 
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* • 슬라이드 인 애니메이션 */
+  animation: toastSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* • 토스트 슬라이드 인 애니메이션 정의 */
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* • 성공 토스트 스타일 (초록색 그라데이션) */
+.toast.success { 
+  background: linear-gradient(135deg, rgba(72, 187, 120, 0.95) 0%, rgba(56, 161, 105, 0.95) 100%);
+  border-color: rgba(72, 187, 120, 0.3);
+}
+
+/* • 에러 토스트 스타일 (빨간색 그라데이션) */
+.toast.error { 
+  background: linear-gradient(135deg, rgba(245, 101, 101, 0.95) 0%, rgba(229, 62, 62, 0.95) 100%);
+  border-color: rgba(245, 101, 101, 0.3);
+}
+
+/* ===== 반응형 웹 디자인 ===== */
+@media (max-width: 768px) {
+  /* • 모바일 환경 최적화 */
+  .page { 
+    padding: 16px; 
+    align-items: flex-start;
+    padding-top: 40px;
+    padding-bottom: 100px;
+  }
+  
+  .title { 
+    font-size: 2rem;
+    margin-bottom: 24px;
+  }
+  
+  .card { 
+    padding: 24px; 
+  }
+  
+  /* • 모바일에서 폼을 세로 배치 */
+  .expense-form { 
+    grid-template-columns: 1fr; 
+    gap: 16px;
+  }
+  
+  /* • 모바일에서 항목 레이아웃 조정 */
+  .expense-item { 
+    grid-template-columns: 1fr 1fr auto; 
+    gap: 12px;
+    padding: 16px;
+  }
+  
+  /* • 모바일에서 총지출 영역 세로 배치 */
+  .total-spending {
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .total-spending .label {
+    font-size: 16px;
+  }
+  
+  .total-spending .amount {
+    font-size: 2rem;
+  }
+  
+  /* • 모바일에서 토스트 전체 너비 사용 */
+  .toast { 
+    left: 16px; 
+    right: 16px; 
+    transform: none; 
+    min-width: auto;
+    font-size: 14px;
+    padding: 14px 20px;
+  }
+}
+
+

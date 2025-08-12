@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="15" fill="#667eea" stroke="#764ba2" stroke-width="2"/>
+  
+  <!-- Calculator icon -->
+  <rect x="8" y="8" width="16" height="16" rx="2" fill="white" stroke="#4a5568" stroke-width="1"/>
+  
+  <!-- Display area -->
+  <rect x="10" y="10" width="12" height="4" rx="1" fill="#e2e8f0"/>
+  
+  <!-- Buttons -->
+  <rect x="10" y="16" width="3" height="3" rx="1" fill="#48bb78"/>
+  <rect x="15" y="16" width="3" height="3" rx="1" fill="#f56565"/>
+  <rect x="20" y="16" width="3" height="3" rx="1" fill="#48bb78"/>
+  
+  <rect x="10" y="21" width="3" height="3" rx="1" fill="#f56565"/>
+  <rect x="15" y="21" width="3" height="3" rx="1" fill="#48bb78"/>
+  <rect x="20" y="21" width="3" height="3" rx="1" fill="#f56565"/>
+  
+  <!-- Plus and minus symbols -->
+  <text x="16" y="18" font-family="Arial" font-size="8" fill="white" text-anchor="middle">+</text>
+  <text x="11.5" y="18" font-family="Arial" font-size="8" fill="white" text-anchor="middle">+</text>
+  <text x="21.5" y="18" font-family="Arial" font-size="8" fill="white" text-anchor="middle">+</text>
+  
+  <text x="11.5" y="23" font-family="Arial" font-size="8" fill="white" text-anchor="middle">-</text>
+  <text x="16" y="23" font-family="Arial" font-size="8" fill="white" text-anchor="middle">+</text>
+  <text x="21.5" y="23" font-family="Arial" font-size="8" fill="white" text-anchor="middle">-</text>
+</svg>

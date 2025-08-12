@@ -1,0 +1,188 @@
+# ===== 의존성 =====
+# • npm 패키지 디렉토리
+node_modules/
+# • yarn 패키지 디렉토리
+yarn.lock
+# • pnpm 패키지 디렉토리
+pnpm-lock.yaml
+
+# ===== 빌드 출력 =====
+# • Vite 빌드 결과물
+dist/
+dist-ssr/
+# • Next.js 빌드 결과물
+.next/
+out/
+# • Nuxt.js 빌드 결과물
+.nuxt/
+.output/
+
+# ===== 환경 변수 =====
+# • 환경 설정 파일
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+# • 환경 변수 타입 정의
+.env*.local
+
+# ===== 로그 파일 =====
+# • npm 로그
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+# • 일반 로그 파일
+*.log
+# • 로그 디렉토리
+logs/
+
+# ===== 런타임 데이터 =====
+# • pids
+*.pid
+*.seed
+*.pid.lock
+
+# ===== 커버리지 디렉토리 =====
+# • 테스트 커버리지 결과
+coverage/
+*.lcov
+# • nyc 테스트 커버리지
+.nyc_output
+
+# ===== 편집기 및 IDE =====
+# • VSCode
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# • Vim
+*.swp
+*.swo
+*~
+
+# • Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ===== OS 생성 파일 =====
+# • macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# • Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.tmp
+*.temp
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# • Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ===== 임시 파일 =====
+# • 임시 디렉토리
+tmp/
+temp/
+# • 임시 파일
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+
+# ===== 캐시 디렉토리 =====
+# • npm 캐시
+.npm
+.eslintcache
+# • Vite 캐시
+.vite/
+# • Parcel 캐시
+.cache
+.parcel-cache
+
+# ===== 테스트 관련 =====
+# • Jest 캐시
+.jest/
+# • Cypress
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+
+# ===== 배포 관련 =====
+# • gh-pages 배포 결과물
+.gh-pages/
+# • Netlify
+.netlify/
+# • Vercel
+.vercel/
+
+# ===== 타입스크립트 =====
+# • 타입스크립트 컴파일 결과
+*.tsbuildinfo
+
+# ===== 기타 =====
+# • 압축 파일
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+# • 바이너리 파일
+*.exe
+*.dll
+*.so
+*.dylib
+# • 데이터베이스
+*.db
+*.sqlite
+*.sqlite3
+
+# ===== 프로젝트 특화 =====
+# • 로컬 개발 설정
+.local/
+# • 사용자별 설정
+user.config.js
+# • 디버그 파일
+debug.log
