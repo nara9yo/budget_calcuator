@@ -47,8 +47,8 @@ jobs:
           # GitHub 사용자명 추출
           GITHUB_USERNAME="${{ github.repository_owner }}"
           # package.json의 homepage 업데이트
-          sed -i "s|https://\[your-username\]\.github\.io/buget_calcuator|https://$GITHUB_USERNAME.github.io/buget_calcuator|g" package.json
-          echo "Updated homepage to: https://$GITHUB_USERNAME.github.io/buget_calcuator"
+          sed -i "s|https://\[your-username\]\.github\.io/budget_calcuator|https://$GITHUB_USERNAME.github.io/budget_calcuator|g" package.json
+          echo "Updated homepage to: https://$GITHUB_USERNAME.github.io/budget_calcuator"
           
       # • 프로젝트 빌드
       - name: Build project

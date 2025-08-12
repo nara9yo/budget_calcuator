@@ -4,7 +4,7 @@ React와 TypeScript로 구현된 간단하고 직관적인 예산(지출/수입)
 
 ## 🌐 라이브 데모
 
-**📱 [GitHub Pages에서 바로 사용해보기](https://nara9yo.github.io/buget_calcuator)**
+**📱 [GitHub Pages에서 바로 사용해보기](https://nara9yo.github.io/budget_calcuator)**
 
 > **💡 참고**: 위 링크는 현재 저장소 소유자(nara9yo)의 GitHub Pages입니다.  
 > 다른 사용자가 포크하여 사용할 경우, GitHub Actions가 자동으로 올바른 URL로 설정합니다.
@@ -47,7 +47,7 @@ npm run deploy
 ## 🏗️ 프로젝트 구조
 
 ```
-buget_calcuator/
+budget_calcuator/
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml          # GitHub Actions 배포 워크플로우
@@ -204,7 +204,7 @@ npm run deploy
 
 ### 3. 배포 확인
 - 포크한 저장소의 Actions 탭에서 배포 상태 확인
-- 성공적으로 배포되면 `https://[your-username].github.io/buget_calcuator`에서 접속 가능
+- 성공적으로 배포되면 `https://[your-username].github.io/budget_calcuator`에서 접속 가능
 
 ## 📞 문의
 
