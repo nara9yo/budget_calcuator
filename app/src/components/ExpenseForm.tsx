@@ -31,6 +31,10 @@ export default function ExpenseForm({ onSubmit, editingExpense, onCancelEdit }: 
     if (editingExpense) {
       setTitle(editingExpense.title);
       setAmountText(formatWithCommas(editingExpense.amount));
+    } else {
+      // 편집 모드가 비활성화되면 입력 필드 초기화
+      setTitle('');
+      setAmountText('');
     }
   }, [editingExpense]);
 

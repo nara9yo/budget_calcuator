@@ -70,6 +70,10 @@ budget_calcuator/
 │       │   └── format.ts       # 금액 포맷팅
 │       └── styles/
 │           └── index.css       # 전역 스타일 (반응형 디자인)
+├── DEPLOYMENT.md               # 배포 가이드 및 GitHub Pages 설정 방법
+├── GITHUB_SETUP.md             # GitHub 저장소 설정 및 초기 구성 가이드
+├── RFP.md                      # 프로젝트 요구사항 명세서 (RFP)
+├── budget-calculator-ref.gif   # 애플리케이션 동작 예시 GIF 이미지
 └── README.md
 ```
 
