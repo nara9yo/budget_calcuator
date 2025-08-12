@@ -4,7 +4,10 @@ React와 TypeScript로 구현된 간단하고 직관적인 예산(지출/수입)
 
 ## 🌐 라이브 데모
 
-**📱 [GitHub Pages에서 바로 사용해보기](https://[your-username].github.io/buget_calcuator)**
+**📱 [GitHub Pages에서 바로 사용해보기](https://nara9yo.github.io/buget_calcuator)**
+
+> **💡 참고**: 위 링크는 현재 저장소 소유자(nara9yo)의 GitHub Pages입니다.  
+> 다른 사용자가 포크하여 사용할 경우, GitHub Actions가 자동으로 올바른 URL로 설정합니다.
 
 ## ✨ 주요 기능
 
@@ -153,6 +156,11 @@ interface Expense {
 - GitHub Actions 워크플로우를 통한 CI/CD 파이프라인
 - 수동 배포도 가능 (`workflow_dispatch` 트리거)
 
+### 🔄 동적 Homepage 처리
+- `package.json`의 `homepage` 필드에 `[your-username]` 플레이스홀더 사용
+- GitHub Actions가 자동으로 `github.repository_owner`를 감지하여 실제 사용자명으로 대체
+- 다른 사용자가 포크해도 자동으로 올바른 URL 설정
+
 ### 수동 배포
 ```bash
 cd app
@@ -184,6 +192,19 @@ npm run deploy
 3. 변경사항 커밋 (`git commit -m 'Add some AmazingFeature'`)
 4. 브랜치에 Push (`git push origin feature/AmazingFeature`)
 5. Pull Request 생성
+
+## 🚀 다른 사용자를 위한 사용법
+
+### 1. 저장소 포크
+- 이 저장소를 자신의 GitHub 계정으로 포크
+
+### 2. 자동 설정
+- GitHub Actions가 자동으로 `package.json`의 homepage를 올바른 URL로 설정
+- `[your-username]` 부분이 자동으로 실제 사용자명으로 대체됨
+
+### 3. 배포 확인
+- 포크한 저장소의 Actions 탭에서 배포 상태 확인
+- 성공적으로 배포되면 `https://[your-username].github.io/buget_calcuator`에서 접속 가능
 
 ## 📞 문의
 

@@ -32,7 +32,12 @@ npm install gh-pages --save-dev
 }
 ```
 
-**⚠️ 중요**: `[your-username]`을 실제 GitHub 사용자명으로 변경하세요.
+**⚠️ 중요**: `[your-username]`은 자동으로 GitHub Actions에서 처리됩니다.
+
+**🔄 자동 처리 과정:**
+1. GitHub Actions가 `github.repository_owner`를 통해 사용자명 자동 감지
+2. `sed` 명령어로 `[your-username]`을 실제 사용자명으로 대체
+3. 빌드 시 올바른 homepage URL 사용
 
 ### 3. vite.config.ts 확인
 ```typescript
@@ -147,13 +152,6 @@ npm run deploy
 - [GitHub Pages 공식 문서](https://pages.github.com/)
 - [GitHub Actions 공식 문서](https://docs.github.com/en/actions)
 - [Vite 배포 가이드](https://vitejs.dev/guide/static-deploy.html)
-
-## 🆘 지원
-
-배포 과정에서 문제가 발생하면:
-1. GitHub Issues에 문제 상세 설명
-2. 에러 로그 첨부
-3. 환경 정보 (OS, Node.js 버전 등) 제공
 
 ---
 
