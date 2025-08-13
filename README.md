@@ -6,6 +6,8 @@ React와 TypeScript로 구현된 간단하고 직관적인 예산(지출/수입)
 
 **📱 [GitHub Pages에서 바로 사용해보기](https://nara9yo.github.io/budget_calcuator)**
 
+![Image](https://github.com/user-attachments/assets/4fc93963-77f2-480e-a543-eddf063de8a5)
+
 > **💡 참고**: 위 링크는 현재 저장소 소유자(nara9yo)의 GitHub Pages입니다.  
 > 다른 사용자가 포크하여 사용할 경우, GitHub Actions가 자동으로 올바른 URL로 설정합니다.
 
