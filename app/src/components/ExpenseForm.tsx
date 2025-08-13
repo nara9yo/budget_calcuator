@@ -10,6 +10,8 @@ import type { Expense } from '../utils/storage';
  * • 금액 입력 시 천 단위 구분자(컴마) 자동 포맷팅
  * • 음수 입력 지원 (수입 표시)
  * • 입력 유효성 검사
+ * • 반응형 그리드 레이아웃 (모바일/데스크톱)
+ * • Flat UI Colors 팔레트 기반 스타일링
  */
 
 type Props = {
@@ -27,7 +29,7 @@ export default function ExpenseForm({ onSubmit, editingExpense, onCancelEdit }: 
   const [isComposingAmount, setIsComposingAmount] = useState<boolean>(false);
   const isEditing = useMemo(() => !!editingExpense, [editingExpense]);
 
-  // • 편집 모드 활성화 시 기존 데이터 폼에 로드
+  // • 편집 모드 활성화 시 기존 데이터 폼에 로드 (데이터 바인딩)
   useEffect(() => {
     if (editingExpense) {
       setTitle(editingExpense.title);
@@ -39,16 +41,16 @@ export default function ExpenseForm({ onSubmit, editingExpense, onCancelEdit }: 
     }
   }, [editingExpense]);
 
-  // • 한글 입력을 위한 언어 설정 강제 적용
+  // • 한글 입력을 위한 언어 설정 강제 적용 (IME 최적화)
   useEffect(() => {
     const titleInput = document.getElementById('title') as HTMLInputElement;
     const amountInput = document.getElementById('amount') as HTMLInputElement;
-    
+
     if (titleInput) {
       titleInput.setAttribute('lang', 'ko');
       titleInput.setAttribute('data-ime-mode', 'active');
     }
-    
+
     if (amountInput) {
       amountInput.setAttribute('lang', 'ko');
       amountInput.setAttribute('data-ime-mode', 'active');
@@ -89,7 +91,7 @@ export default function ExpenseForm({ onSubmit, editingExpense, onCancelEdit }: 
     }
     // 음수 기호와 숫자, 컴마만 허용
     const validChars = value.replace(/[^0-9,-]/g, '');
-    
+
     // 음수 기호는 맨 앞에만 허용
     if (validChars.startsWith('-')) {
       const withoutMinus = validChars.substring(1);
@@ -139,7 +141,7 @@ export default function ExpenseForm({ onSubmit, editingExpense, onCancelEdit }: 
     <form className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-5 items-end mb-8" onSubmit={handleSubmit}>
       {/* • 지출 항목 제목 입력 */}
       <div className="flex flex-col gap-2">
-        <label htmlFor="title" className="text-sm font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wide">
+        <label htmlFor="title" className="text-sm font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
           지출 항목
         </label>
         <input
@@ -148,13 +150,13 @@ export default function ExpenseForm({ onSubmit, editingExpense, onCancelEdit }: 
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           autoComplete="off"
-          className="h-12 px-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg text-base font-medium focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white dark:bg-gray-800 dark:text-gray-100"
+          className="h-12 px-4 border-2 border-slate-200 dark:border-slate-600 rounded-lg text-base font-medium focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition-all duration-200 bg-white dark:bg-slate-800 dark:text-slate-100"
         />
       </div>
-      
+
       {/* • 금액 입력 (지출: 양수, 수입: 음수) */}
       <div className="flex flex-col gap-2">
-        <label htmlFor="amount" className="text-sm font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wide">
+        <label htmlFor="amount" className="text-sm font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
           비용 (지출: 양수, 수입: 음수)
         </label>
         <input
@@ -168,17 +170,17 @@ export default function ExpenseForm({ onSubmit, editingExpense, onCancelEdit }: 
             setIsComposingAmount(false);
             handleAmountChange((e.target as HTMLInputElement).value);
           }}
-          className="h-12 px-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg text-base font-medium focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white dark:bg-gray-800 dark:text-gray-100"
+          className="h-12 px-4 border-2 border-slate-200 dark:border-slate-600 rounded-lg text-base font-medium focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition-all duration-200 bg-white dark:bg-slate-800 dark:text-slate-100"
         />
       </div>
 
       {/* • 액션 버튼 (추가/수정, 취소) */}
       <div className="w-full md:w-auto flex gap-3 justify-end md:justify-end items-stretch md:self-end md:justify-self-end flex-nowrap">
-        <button type="submit" className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold h-12 px-5 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 inline-flex items-center justify-center">
+        <button type="submit" className="bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-semibold h-12 px-5 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 inline-flex items-center justify-center">
           {isEditing ? '수정' : '추가'} ➤
         </button>
         {isEditing && (
-          <button type="button" className="bg-gray-500 hover:bg-gray-600 text-white font-semibold h-12 px-5 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 inline-flex items-center justify-center" onClick={onCancelEdit}>
+          <button type="button" className="bg-slate-500 hover:bg-slate-600 text-white font-semibold h-12 px-5 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 inline-flex items-center justify-center" onClick={onCancelEdit}>
             취소
           </button>
         )}

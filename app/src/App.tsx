@@ -16,6 +16,8 @@ import Toast from './components/Toast';
  * • 실시간 총액 계산 및 표시
  * • 토스트 알림 시스템
  * • 편집 모드 상태 관리
+ * • 다크/라이트/시스템 테마 모드 지원
+ * • 테마 드롭다운 메뉴 (자동 닫힘 기능 포함)
  */
 
 type ToastState = { message: string; type: 'success' | 'error' } | null;
@@ -42,7 +44,7 @@ export default function App() {
   const [isDark, setIsDark] = useState<boolean>(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
-  // 시스템 테마 변경 감지
+  // 시스템 테마 변경 감지 (prefers-color-scheme 미디어 쿼리 모니터링)
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e: MediaQueryListEvent) => {
@@ -55,10 +57,10 @@ export default function App() {
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, [themeMode]);
 
-  // 테마 모드에 따른 다크 모드 상태 설정
+  // 테마 모드에 따른 다크 모드 상태 설정 (시스템/수동 모드 구분)
   useEffect(() => {
     let shouldBeDark = false;
-    
+
     if (themeMode === 'system') {
       shouldBeDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     } else {
@@ -68,7 +70,7 @@ export default function App() {
     setIsDark(shouldBeDark);
   }, [themeMode]);
 
-  // HTML에 다크 클래스 적용
+  // HTML에 다크 클래스 적용 및 로컬 스토리지 저장
   useEffect(() => {
     const root = document.documentElement;
     if (isDark) {
@@ -76,7 +78,7 @@ export default function App() {
     } else {
       root.classList.remove('dark');
     }
-    
+
     // 시스템 모드가 아닐 때만 로컬 스토리지에 저장
     if (themeMode !== 'system') {
       localStorage.setItem('theme', themeMode);
@@ -85,13 +87,13 @@ export default function App() {
     }
   }, [isDark, themeMode]);
 
-  // 테마 모드 변경 핸들러
+  // 테마 모드 변경 핸들러 (드롭다운 자동 닫기 포함)
   const handleThemeChange = (newTheme: 'system' | 'light' | 'dark') => {
     setThemeMode(newTheme);
     setIsDropdownOpen(false); // 드롭다운 자동 닫기
   };
 
-  // 드롭다운 외부 클릭 시 닫기
+  // 드롭다운 외부 클릭 시 자동 닫기 (클릭 이벤트 위임)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
@@ -176,55 +178,51 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 dark:from-gray-900 dark:via-gray-900 dark:to-black bg-fixed py-10 pb-40 px-6 transition-all duration-700 ease-in-out">
+    <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-400 to-teal-400 dark:from-slate-800 dark:via-slate-700 dark:to-slate-600 bg-fixed py-10 pb-40 px-6 transition-all duration-700 ease-in-out">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-4xl md:text-5xl font-bold text-white dark:text-gray-100 text-center md:text-left drop-shadow-2xl tracking-tight">
-          예산 계산기
+            예산 계산기
           </h1>
-                     <div className="relative theme-dropdown">
-             <button
-               aria-label="테마 모드 선택"
-               className="h-10 px-4 rounded-lg border border-white/30 bg-white/20 text-white backdrop-blur hover:bg-white/30 transition-all duration-300 shadow md:ml-4 inline-flex items-center gap-2 hover:scale-105"
-               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-             >
-               {themeMode === 'system' && '🖥️'}
-               {themeMode === 'light' && '☀️'}
-               {themeMode === 'dark' && '🌙'}
-               <span className="text-sm font-medium">
-                 {themeMode === 'system' ? '시스템' : themeMode === 'light' ? '라이트' : '다크'}
-               </span>
-               <span className={`text-xs transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}>▼</span>
-             </button>
-             
-             {/* 테마 모드 드롭다운 */}
-             <div className={`absolute right-0 top-full mt-2 w-32 bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-lg shadow-xl border border-white/20 dark:border-gray-700 transition-all duration-300 transform z-50 ${
-               isDropdownOpen 
-                 ? 'opacity-100 visible translate-y-0' 
-                 : 'opacity-0 invisible translate-y-2'
-             }`}>
+          <div className="relative theme-dropdown">
+            <button
+              aria-label="테마 모드 선택"
+              className="h-10 px-4 rounded-lg border border-white/30 bg-white/20 text-white backdrop-blur hover:bg-white/30 transition-all duration-300 shadow md:ml-4 inline-flex items-center gap-2 hover:scale-105"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              {themeMode === 'system' && '🖥️'}
+              {themeMode === 'light' && '☀️'}
+              {themeMode === 'dark' && '🌙'}
+              <span className="text-sm font-medium">
+                {themeMode === 'system' ? '시스템' : themeMode === 'light' ? '라이트' : '다크'}
+              </span>
+              <span className={`text-xs transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}>▼</span>
+            </button>
+
+            {/* 테마 모드 드롭다운 */}
+            <div className={`absolute right-0 top-full mt-2 w-32 bg-white/95 dark:bg-slate-700/95 backdrop-blur-xl rounded-lg shadow-xl border border-white/20 dark:border-slate-600 transition-all duration-300 transform z-50 ${isDropdownOpen
+              ? 'opacity-100 visible translate-y-0'
+              : 'opacity-0 invisible translate-y-2'
+              }`}>
               <div className="py-2">
                 <button
                   onClick={() => handleThemeChange('system')}
-                  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 ${
-                    themeMode === 'system' ? 'text-blue-600 dark:text-blue-400 font-medium' : 'text-gray-700 dark:text-gray-300'
-                  }`}
+                  className={`w-full px-4 py-2 text-left text-sm hover:bg-slate-100 dark:hover:bg-slate-600 transition-colors flex items-center gap-2 ${themeMode === 'system' ? 'text-cyan-600 dark:text-cyan-400 font-medium' : 'text-slate-700 dark:text-slate-300'
+                    }`}
                 >
                   🖥️ 시스템
                 </button>
                 <button
                   onClick={() => handleThemeChange('light')}
-                  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 ${
-                    themeMode === 'light' ? 'text-blue-600 dark:text-blue-400 font-medium' : 'text-gray-700 dark:text-gray-300'
-                  }`}
+                  className={`w-full px-4 py-2 text-left text-sm hover:bg-slate-100 dark:hover:bg-slate-600 transition-colors flex items-center gap-2 ${themeMode === 'light' ? 'text-cyan-600 dark:text-cyan-400 font-medium' : 'text-slate-700 dark:text-slate-300'
+                    }`}
                 >
                   ☀️ 라이트
                 </button>
                 <button
                   onClick={() => handleThemeChange('dark')}
-                  className={`w-full px-4 py-2 text-left text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 ${
-                    themeMode === 'dark' ? 'text-blue-600 dark:text-blue-400 font-medium' : 'text-gray-700 dark:text-gray-300'
-                  }`}
+                  className={`w-full px-4 py-2 text-left text-left text-sm hover:bg-slate-100 dark:hover:bg-slate-600 transition-colors flex items-center gap-2 ${themeMode === 'dark' ? 'text-cyan-600 dark:text-cyan-400 font-medium' : 'text-slate-700 dark:text-slate-300'
+                    }`}
                 >
                   🌙 다크
                 </button>
@@ -233,7 +231,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="bg-white/95 dark:bg-gray-900/90 text-gray-900 dark:text-gray-100 backdrop-blur-xl rounded-2xl p-8 shadow-xl border border-white/20 dark:border-gray-800 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 mb-6">
+        <div className="bg-white/95 dark:bg-slate-800/90 text-slate-800 dark:text-slate-100 backdrop-blur-xl rounded-2xl p-8 shadow-xl border border-white/20 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 mb-6">
           {/* • 지출/수입 입력 폼 (추가/수정 모드) */}
           <ExpenseForm onSubmit={handleSubmit} editingExpense={editingExpense} onCancelEdit={() => setEditingId(null)} />
 

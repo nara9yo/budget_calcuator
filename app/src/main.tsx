@@ -16,7 +16,7 @@ import './styles/index.css';
 // 다크 모드 초기화
 const initializeDarkMode = () => {
   const saved = localStorage.getItem('theme') as 'system' | 'light' | 'dark';
-  
+
   if (saved === 'system' || !saved) {
     // 시스템 테마 사용
     const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
