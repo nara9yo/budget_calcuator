@@ -4,7 +4,7 @@ React와 TypeScript로 구현된 간단하고 직관적인 예산(지출/수입)
 
 ## 🌐 라이브 데모
 
-**📱 [GitHub Pages에서 바로 사용해보기](https://nara9yo.github.io/budget_calcuator)**
+**📱 [GitHub Pages에서 바로 사용해보기](https://nara9yo.github.io/budget_calculator)**
 
 ![Image](https://github.com/user-attachments/assets/4fc93963-77f2-480e-a543-eddf063de8a5)
 
@@ -51,7 +51,7 @@ npm run deploy
 ## 🏗️ 프로젝트 구조
 
 ```
-budget_calcuator/
+budget_calculator/
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml          # GitHub Actions 배포 워크플로우
@@ -240,7 +240,7 @@ npm run deploy
 
 ### 3. 배포 확인
 - 포크한 저장소의 Actions 탭에서 배포 상태 확인
-- 성공적으로 배포되면 `https://[your-username].github.io/budget_calcuator`에서 접속 가능
+- 성공적으로 배포되면 `https://[your-username].github.io/budget_calculator`에서 접속 가능
 
 ### 4. 테마 시스템 활용
 - 시스템 테마 자동 감지 기능으로 사용자 환경에 맞는 UI 제공

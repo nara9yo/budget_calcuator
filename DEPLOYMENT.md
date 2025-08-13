@@ -5,7 +5,7 @@
 ## 📋 사전 준비사항
 
 1. **GitHub 저장소 생성**
-   - GitHub에 `budget_calcuator` 이름으로 새 저장소 생성
+   - GitHub에 `budget_calculator` 이름으로 새 저장소 생성
    - 저장소를 로컬에 클론
 
 2. **GitHub Pages 설정**
@@ -24,7 +24,7 @@ npm install gh-pages --save-dev
 ### 2. package.json 확인
 ```json
 {
-  "homepage": "https://[your-username].github.io/budget_calcuator",
+  "homepage": "https://[your-username].github.io/budget_calculator",
   "scripts": {
     "deploy": "npm run build && gh-pages -d dist",
     "predeploy": "npm run build"
@@ -43,7 +43,7 @@ npm install gh-pages --save-dev
 ```typescript
 export default defineConfig({
   plugins: [react()],
-  base: '/budget_calcuator/',
+  base: '/budget_calculator/',
   // ... 기타 설정
 });
 ```
@@ -64,7 +64,7 @@ export default defineConfig({
    - 성공적으로 완료되면 자동으로 GitHub Pages에 배포
 
 3. **배포 확인**
-   - `https://[your-username].github.io/budget_calcuator`에서 확인
+   - `https://[your-username].github.io/budget_calculator`에서 확인
 
 ### 방법 2: 수동 배포
 
