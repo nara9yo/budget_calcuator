@@ -20,7 +20,15 @@ export default function Toast({ open, message, type = 'success', onClose }: Prop
   if (!open) return null;
   
   return (
-    <div className={`toast ${type}`} role="status" onClick={onClose}>
+    <div 
+      className={`fixed left-1/2 top-6 transform -translate-x-1/2 bg-black/95 backdrop-blur-xl text-white px-6 py-4 rounded-lg shadow-2xl z-50 min-w-[300px] text-center text-base font-semibold border border-white/10 cursor-pointer transition-all duration-300 animate-fade-in ${
+        type === 'success' 
+          ? 'bg-gradient-to-r from-green-500/95 to-green-600/95 border-green-300/30' 
+          : 'bg-gradient-to-r from-red-500/95 to-red-600/95 border-red-300/30'
+      }`} 
+      role="status" 
+      onClick={onClose}
+    >
       {/* • 토스트 메시지 내용 */}
       {message}
     </div>

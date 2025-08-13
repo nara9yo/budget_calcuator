@@ -20,17 +20,17 @@ type Props = {
 
 export default function ExpenseList({ expenses, onEdit, onDelete, onClearAll }: Props) {
   return (
-    <section className="expense-list">
+    <section>
       {/* • 지출/수입 항목들을 ExpenseItem 컴포넌트로 렌더링 */}
-      <ul>
+      <ul className="bg-white/80 dark:bg-gray-900/70 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 mb-6">
         {expenses.map((e) => (
           <ExpenseItem key={e.id} expense={e} onEdit={onEdit} onDelete={onDelete} />
         ))}
       </ul>
       
       {/* • 전체 목록 삭제 버튼 (목록이 비어있으면 비활성화) */}
-      <div className="list-actions">
-        <button className="btn danger" onClick={onClearAll} disabled={expenses.length === 0}>
+      <div className="flex justify-end">
+        <button className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none" onClick={onClearAll} disabled={expenses.length === 0}>
           목록 지우기 🗑
         </button>
       </div>

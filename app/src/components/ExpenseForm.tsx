@@ -136,22 +136,27 @@ export default function ExpenseForm({ onSubmit, editingExpense, onCancelEdit }: 
   }
 
   return (
-    <form className="expense-form" onSubmit={handleSubmit}>
+    <form className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-5 items-end mb-8" onSubmit={handleSubmit}>
       {/* • 지출 항목 제목 입력 */}
-      <div className="row">
-        <label htmlFor="title">지출 항목</label>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="title" className="text-sm font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wide">
+          지출 항목
+        </label>
         <input
           id="title"
           placeholder="예) 렌트비"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           autoComplete="off"
+          className="h-12 px-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg text-base font-medium focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white dark:bg-gray-800 dark:text-gray-100"
         />
       </div>
       
       {/* • 금액 입력 (지출: 양수, 수입: 음수) */}
-      <div className="row">
-        <label htmlFor="amount">비용 (지출: 양수, 수입: 음수)</label>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="amount" className="text-sm font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wide">
+          비용 (지출: 양수, 수입: 음수)
+        </label>
         <input
           id="amount"
           placeholder="예) 50,000 또는 -30,000"
@@ -163,14 +168,17 @@ export default function ExpenseForm({ onSubmit, editingExpense, onCancelEdit }: 
             setIsComposingAmount(false);
             handleAmountChange((e.target as HTMLInputElement).value);
           }}
+          className="h-12 px-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg text-base font-medium focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white dark:bg-gray-800 dark:text-gray-100"
         />
       </div>
 
       {/* • 액션 버튼 (추가/수정, 취소) */}
-      <div className="actions">
-        <button type="submit" className="btn primary">{isEditing ? '수정' : '추가'} ➤</button>
+      <div className="w-full md:w-auto flex gap-3 justify-end md:justify-end items-stretch md:self-end md:justify-self-end flex-nowrap">
+        <button type="submit" className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold h-12 px-5 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 inline-flex items-center justify-center">
+          {isEditing ? '수정' : '추가'} ➤
+        </button>
         {isEditing && (
-          <button type="button" className="btn" onClick={onCancelEdit}>
+          <button type="button" className="bg-gray-500 hover:bg-gray-600 text-white font-semibold h-12 px-5 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 inline-flex items-center justify-center" onClick={onCancelEdit}>
             취소
           </button>
         )}

@@ -23,19 +23,33 @@ export default function ExpenseItem({ expense, onEdit, onDelete }: Props) {
   const isNegative = expense.amount < 0;
   
   return (
-    <li className="expense-item">
+    <li className="expense-item grid grid-cols-[2fr_1fr_auto] items-center gap-4 p-5 border-b border-gray-200 dark:border-gray-800 last:border-b-0">
       {/* • 지출/수입 항목 제목 */}
-      <span className="title">{expense.title}</span>
+      <span className="font-semibold text-gray-800 dark:text-gray-100 text-left">{expense.title}</span>
       
       {/* • 금액 표시 (양수/음수에 따른 스타일 적용) */}
-      <span className={`amount ${isPositive ? 'positive' : isNegative ? 'negative' : ''}`}>
+      <span className={`text-right font-semibold text-lg ${
+        isPositive ? 'text-green-600' : isNegative ? 'text-red-600' : 'text-gray-800'
+      } dark:text-gray-100`}>
         {formatWon(expense.amount)}
       </span>
       
       {/* • 액션 버튼 (수정, 삭제) */}
-      <div className="item-actions">
-        <button aria-label="수정" className="icon-btn" onClick={() => onEdit(expense.id)}>✏️</button>
-        <button aria-label="삭제" className="icon-btn" onClick={() => onDelete(expense.id)}>🗑️</button>
+      <div className="flex gap-2 justify-end">
+        <button 
+          aria-label="수정" 
+          className="w-9 h-9 rounded-full hover:bg-gray-100 flex items-center justify-center transition-all duration-200 hover:scale-110 text-lg" 
+          onClick={() => onEdit(expense.id)}
+        >
+          ✏️
+        </button>
+        <button 
+          aria-label="삭제" 
+          className="w-9 h-9 rounded-full hover:bg-red-100 flex items-center justify-center transition-all duration-200 hover:scale-110 text-lg" 
+          onClick={() => onDelete(expense.id)}
+        >
+          🗑️
+        </button>
       </div>
     </li>
   );

@@ -13,6 +13,28 @@ import './styles/index.css';
  * • 전역 스타일시트 로드
  */
 
+// 다크 모드 초기화
+const initializeDarkMode = () => {
+  const saved = localStorage.getItem('theme') as 'system' | 'light' | 'dark';
+  
+  if (saved === 'system' || !saved) {
+    // 시스템 테마 사용
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  } else if (saved === 'dark') {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+};
+
+// 초기화 실행
+initializeDarkMode();
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />
