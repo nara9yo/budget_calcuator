@@ -12,13 +12,13 @@
  * 원화 포맷팅 함수
  * • 절댓값에 대해 한국어 로케일 적용
  * • 천 단위 구분자 자동 추가
- * • 음수인 경우 ₩- 형태로 표시
+ * • 음수인 경우 -₩ 형태로 표시 (통화 기호 앞에 마이너스)
  * • 양수인 경우 ₩ 형태로 표시
  */
 export function formatWon(value: number): string {
   const absValue = Math.abs(value);
   const formatted = new Intl.NumberFormat('ko-KR').format(absValue);
-  return value < 0 ? `₩-${formatted}` : `₩${formatted}`;
+  return value < 0 ? `-₩${formatted}` : `₩${formatted}`;
 }
 
 
