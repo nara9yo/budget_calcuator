@@ -24,6 +24,7 @@ export default function ExpenseForm({ onSubmit, editingExpense, onCancelEdit }: 
   // • 편집 모드 여부 판단
   const [title, setTitle] = useState<string>('');
   const [amountText, setAmountText] = useState<string>('');
+  const [isComposingAmount, setIsComposingAmount] = useState<boolean>(false);
   const isEditing = useMemo(() => !!editingExpense, [editingExpense]);
 
   // • 편집 모드 활성화 시 기존 데이터 폼에 로드
@@ -37,6 +38,22 @@ export default function ExpenseForm({ onSubmit, editingExpense, onCancelEdit }: 
       setAmountText('');
     }
   }, [editingExpense]);
+
+  // • 한글 입력을 위한 언어 설정 강제 적용
+  useEffect(() => {
+    const titleInput = document.getElementById('title') as HTMLInputElement;
+    const amountInput = document.getElementById('amount') as HTMLInputElement;
+    
+    if (titleInput) {
+      titleInput.setAttribute('lang', 'ko');
+      titleInput.setAttribute('data-ime-mode', 'active');
+    }
+    
+    if (amountInput) {
+      amountInput.setAttribute('lang', 'ko');
+      amountInput.setAttribute('data-ime-mode', 'active');
+    }
+  }, []);
 
   /**
    * 천 단위 구분자(컴마) 추가 함수
@@ -65,6 +82,11 @@ export default function ExpenseForm({ onSubmit, editingExpense, onCancelEdit }: 
    * • 중복 음수 기호 자동 제거
    */
   function handleAmountChange(value: string) {
+    // IME 조합 중에는 필터링하지 않고 그대로 표시
+    if (isComposingAmount) {
+      setAmountText(value);
+      return;
+    }
     // 음수 기호와 숫자, 컴마만 허용
     const validChars = value.replace(/[^0-9,-]/g, '');
     
@@ -132,11 +154,15 @@ export default function ExpenseForm({ onSubmit, editingExpense, onCancelEdit }: 
         <label htmlFor="amount">비용 (지출: 양수, 수입: 음수)</label>
         <input
           id="amount"
-          inputMode="numeric"
           placeholder="예) 50,000 또는 -30,000"
           value={amountText}
           onChange={(e) => handleAmountChange(e.target.value)}
           onBlur={handleAmountBlur}
+          onCompositionStart={() => setIsComposingAmount(true)}
+          onCompositionEnd={(e) => {
+            setIsComposingAmount(false);
+            handleAmountChange((e.target as HTMLInputElement).value);
+          }}
         />
       </div>
 
