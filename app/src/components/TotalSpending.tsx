@@ -35,8 +35,11 @@ export default function TotalSpending({ total, labelPrefix = '총지출:', forma
         </span>
 
         {/* • 총액 표시 (양수/음수에 따른 스타일 적용) */}
-        <span className={`text-4xl md:text-5xl font-bold ${isPositive ? 'text-emerald-600' : isNegative ? 'text-rose-600' : 'text-slate-800'
-          }`}>
+        <span className={`text-4xl md:text-5xl font-bold ${
+          isPositive ? 'text-emerald-600 dark:text-emerald-400' : 
+          isNegative ? 'text-rose-600 dark:text-rose-400' : 
+          'text-slate-800 dark:text-slate-200'
+        }`}>
           {formatter(total)}
         </span>
       </div>
